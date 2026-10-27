@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="tr" data-bs-theme="auto">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Bootstrap Album ve kullanıcı kayıt sistemi">
+    <title>Album - Kayıt Sistemi</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            min-height: 100vh;
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            user-select: none;
+        }
+
+        .hero {
+            padding: 4rem 0;
+        }
+
+        .card {
+            height: 100%;
+            transition: transform .2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .album-placeholder {
+            height: 225px;
+            background: linear-gradient(135deg, #55595c, #343a40);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.4rem;
+        }
+
+        .user-badge {
+            color: #fff;
+            background: #198754;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .modal-content {
+            border-radius: 16px;
+        }
+
+        .form-control {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header data-bs-theme="dark">
+    <nav class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+                <strong>📷 Album</strong>
+            </a>
+
+            <div class="d-flex align-items-center gap-2" id="userArea">
+                <button class="btn btn-outline-light btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#loginModal">
+                    Giriş Yap
+                </button>
+
+                <button class="btn btn-primary btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#registerModal">
+                    Kayıt Ol
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="hero text-center container">
+        <div class="row">
+            <div class="col-lg-7 col-md-9 mx-auto">
+                <h1 class="fw-light" id="welcomeTitle">Album'e Hoş Geldin</h1>
+
+                <p class="lead text-body-secondary" id="welcomeText">
+                    Fotoğraflarını ve içeriklerini keşfet.
+                    Ücretsiz hesap oluşturarak hemen başlayabilirsin.
+                </p>
+
+                <button class="btn btn-primary my-2"
+                        data-bs-toggle="modal"
+                        data-bs-target="#registerModal">
+                    Hemen Kayıt Ol
+                </button>
+
+                <button class="btn btn-secondary my-2"
+                        data-bs-toggle="modal"
+                        data-bs-target="#loginModal">
+                    Giriş Yap
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="album-placeholder">📸 Fotoğraf 1</div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                En sevdiğin fotoğrafları ve anılarını bu alanda paylaşabilirsin.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-sm btn-outline-secondary"
+                                        onclick="showDetails('Fotoğraf 1')">
+                                    Görüntüle
+                                </button>
+                                <small class="text-body-secondary">9 dakika</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="album-placeholder">🌄 Manzara</div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Doğanın güzelliklerini keşfet ve en özel manzaraları incele.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-sm btn-outline-secondary"
+                                        onclick="showDetails('Manzara')">
+                                    Görüntüle
+                                </button>
+                                <small class="text-body-secondary">12 dakika</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="album-placeholder">🏙️ Şehir</div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Şehir hayatından kareleri ve farklı yerleri keşfet.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-sm btn-outline-secondary"
+                                        onclick="showDetails('Şehir')">
+                                    Görüntüle
+                                </button>
+                                <small class="text-body-secondary">15 dakika</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="album-placeholder">🐾 Hayvanlar</div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Sevimli hayvanların dünyasından güzel fotoğraflar.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-sm btn-outline-secondary"
+                                        onclick="showDetails('Hayvanlar')">
+                                    Görüntüle
+                                </button>
+                                <small class="text-body-secondary">5 dakika</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="album-placeholder">🎨 Sanat</div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Yaratıcı çalışmalar ve ilham verici tasarımlar.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-sm btn-outline-secondary"
+                                        onclick="showDetails('Sanat')">
+                                    Görüntüle
+                                </button>
+                                <small class="text-body-secondary">7 dakika</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="album-placeholder">🌌 Uzay</div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Uzayın ve yıldızların büyüleyici görüntülerini keşfet.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-sm btn-outline-secondary"
+                                        onclick="showDetails('Uzay')">
+                                    Görüntüle
+                                </button>
+                                <small class="text-body-secondary">10 dakika</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="text-body-secondary py-5">
+    <div class="container">
+        <p class="float-end mb-1">
+            <a href="#">Başa dön</a>
+        </p>
+        <p class="mb-1">Album örnek sitesi © 2026</p>
+        <p class="mb-0">Bootstrap ile hazırlanmıştır.</p>
+    </div>
+</footer>
+
+<!-- KAYIT OL MODALI -->
+<div class="modal fade" id="registerModal" tabindex="-1"
+     aria-labelledby="registerTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerTitle">Hesap Oluştur</h5>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+
+            <div class="modal-body">
+                <div id="registerMessage" class="alert d-none" role="alert"></div>
+
+                <form id="registerForm">
+                    <div class="mb-3">
+                        <label for="registerName" class="form-label">Ad Soyad</label>
+                        <input type="text" class="form-control" id="registerName"
+                               placeholder="Adınız ve soyadınız"
+                               minlength="2" maxlength="80" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="registerEmail" class="form-label">E-posta</label>
+                        <input type="email" class="form-control" id="registerEmail"
+                               placeholder="ornek@mail.com" maxlength="254" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="registerPassword" class="form-label">Şifre</label>
+                        <input type="password" class="form-control" id="registerPassword"
+                               placeholder="En az 6 karakter"
+                               minlength="6" maxlength="128" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Kayıt Ol
+                    </button>
+                </form>
+
+                <p class="text-center mt-3 mb-0">
+                    Zaten hesabın var mı?
+                    <a href="#" id="openLogin">Giriş yap</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- GİRİŞ YAP MODALI -->
+<div class="modal fade" id="loginModal" tabindex="-1"
+     aria-labelledby="loginTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginTitle">Giriş Yap</h5>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+
+            <div class="modal-body">
+                <div id="loginMessage" class="alert d-none" role="alert"></div>
+
+                <form id="loginForm">
+                    <div class="mb-3">
+                        <label for="loginEmail" class="form-label">E-posta</label>
+                        <input type="email" class="form-control" id="loginEmail"
+                               placeholder="ornek@mail.com" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="loginPassword" class="form-label">Şifre</label>
+                        <input type="password" class="form-control" id="loginPassword"
+                               placeholder="Şifreniz" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">
+                        Giriş Yap
+                    </button>
+                </form>
+
+                <p class="text-center mt-3 mb-0">
+                    Hesabın yok mu?
+                    <a href="#" id="openRegister">Kayıt ol</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BİLGİ MODALI -->
+<div class="modal fade" id="detailsModal" tabindex="-1"
+     aria-labelledby="detailsTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailsTitle">İçerik</h5>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body" id="detailsText"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const USERS_KEY = "album_demo_users";
+    const SESSION_KEY = "album_demo_session";
+
+    const registerModalElement = document.getElementById("registerModal");
+    const loginModalElement = document.getElementById("loginModal");
+
+    const registerModal = bootstrap.Modal.getOrCreateInstance(registerModalElement);
+    const loginModal = bootstrap.Modal.getOrCreateInstance(loginModalElement);
+
+    function getUsers() {
+        try {
+            const users = JSON.parse(localStorage.getItem(USERS_KEY) || "[]");
+            return Array.isArray(users) ? users : [];
+        } catch {
+            return [];
+        }
+    }
+
+    function getSession() {
+        try {
+            return JSON.parse(sessionStorage.getItem(SESSION_KEY) || "null");
+        } catch {
+            return null;
+        }
+    }
+
+    function showMessage(elementId, message, type) {
+        const element = document.getElementById(elementId);
+        element.textContent = message;
+        element.className = "alert alert-" + type;
+    }
+
+    function clearMessage(elementId) {
+        const element = document.getElementById(elementId);
+        element.textContent = "";
+        element.className = "alert d-none";
+    }
+
+    function renderUserArea() {
+        const session = getSession();
+        const userArea = document.getElementById("userArea");
+        const welcomeTitle = document.getElementById("welcomeTitle");
+        const welcomeText = document.getElementById("welcomeText");
+
+        if (session && session.name && session.email) {
+            const badge = document.createElement("span");
+            badge.className = "user-badge";
+            badge.textContent = "Merhaba, " + session.name;
+
+            const logoutButton = document.createElement("button");
+            logoutButton.className = "btn btn-outline-light btn-sm";
+            logoutButton.textContent = "Çıkış Yap";
+            logoutButton.addEventListener("click", logout);
+
+            userArea.replaceChildren(badge, logoutButton);
+            welcomeTitle.textContent = "Hoş geldin, " + session.name + "!";
+            welcomeText.textContent = "Hesabına başarıyla giriş yaptın. Album'ü keşfetmeye başlayabilirsin.";
+        } else {
+            const loginButton = document.createElement("button");
+            loginButton.className = "btn btn-outline-light btn-sm";
+            loginButton.textContent = "Giriş Yap";
+            loginButton.setAttribute("data-bs-toggle", "modal");
+            loginButton.setAttribute("data-bs-target", "#loginModal");
+
+            const registerButton = document.createElement("button");
+            registerButton.className = "btn btn-primary btn-sm";
+            registerButton.textContent = "Kayıt Ol";
+            registerButton.setAttribute("data-bs-toggle", "modal");
+            registerButton.setAttribute("data-bs-target", "#registerModal");
+
+            userArea.replaceChildren(loginButton, registerButton);
+            welcomeTitle.textContent = "Album'e Hoş Geldin";
+            welcomeText.textContent = "Fotoğraflarını ve içeriklerini keşfet. Ücretsiz hesap oluşturarak hemen başlayabilirsin.";
+        }
+    }
+
+    document.getElementById("registerForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        clearMessage("registerMessage");
+
+        const name = document.getElementById("registerName").value.trim();
+        const email = document.getElementById("registerEmail").value.trim().toLowerCase();
+        const password = document.getElementById("registerPassword").value;
+
+        if (name.length < 2) {
+            showMessage("registerMessage", "Lütfen geçerli bir ad gir.", "danger");
+            return;
+        }
+
+        if (password.length < 6) {
+            showMessage("registerMessage", "Şifre en az 6 karakter olmalıdır.", "danger");
+            return;
+        }
+
+        const users = getUsers();
+
+        if (users.some(user => user.email === email)) {
+            showMessage("registerMessage", "Bu e-posta adresi zaten kayıtlı.", "warning");
+            return;
+        }
+
+        /*
+         * Bu örnek demo olduğu için şifre yerel depolamada tutuluyor.
+         * Gerçek uygulamada şifreler sunucuda güvenli bir parola
+         * hash algoritmasıyla saklanmalıdır.
+         */
+        users.push({
+            name: name,
+            email: email,
+            password: password
+        });
+
+        try {
+            localStorage.setItem(USERS_KEY, JSON.stringify(users));
+            sessionStorage.setItem(SESSION_KEY, JSON.stringify({
+                name: name,
+                email: email
+            }));
+        } catch {
+            showMessage("registerMessage", "Kayıt saklanamadı. Tarayıcı depolama alanını kontrol et.", "danger");
+            return;
+        }
+
+        document.getElementById("registerForm").reset();
+        registerModal.hide();
+        renderUserArea();
+        alert("Kayıt başarılı! Hoş geldin, " + name + ".");
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        clearMessage("loginMessage");
+
+        const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+        const password = document.getElementById("loginPassword").value;
+
+        const user = getUsers().find(function (item) {
+            return item.email === email && item.password === password;
+        });
+
+        if (!user) {
+            showMessage("loginMessage", "E-posta veya şifre hatalı.", "danger");
+            return;
+        }
+
+        try {
+            sessionStorage.setItem(SESSION_KEY, JSON.stringify({
+                name: user.name,
+                email: user.email
+            }));
+        } catch {
+            showMessage("loginMessage", "Giriş durumu kaydedilemedi.", "danger");
+            return;
+        }
+
+        document.getElementById("loginForm").reset();
+        loginModal.hide();
+        renderUserArea();
+        alert("Başarıyla giriş yaptın. Hoş geldin, " + user.name + "!");
+    });
+
+    function logout() {
+        sessionStorage.removeItem(SESSION_KEY);
+        renderUserArea();
+        alert("Başarıyla çıkış yaptın.");
+    }
+
+    document.getElementById("openLogin").addEventListener("click", function (event) {
+        event.preventDefault();
+        registerModal.hide();
+        loginModal.show();
+    });
+
+    document.getElementById("openRegister").addEventListener("click", function (event) {
+        event.preventDefault();
+        loginModal.hide();
+        registerModal.show();
+    });
+
+    function showDetails(title) {
+        document.getElementById("detailsTitle").textContent = title;
+        document.getElementById("detailsText").textContent =
+            title + " içeriğini görüntülüyorsun. Bu alanı daha sonra istediğin içerikle geliştirebilirsin.";
+
+        bootstrap.Modal.getOrCreateInstance(
+            document.getElementById("detailsModal")
+        ).show();
+    }
+
+    renderUserArea();
+</script>
+
+</body>
+</html>
